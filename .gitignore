@@ -1,0 +1,23 @@
+# Archivos de compilación temporal
+x64/
+Debug/
+Release/
+.vs/
+*.obj
+*.pdb
+*.idb
+*.tlog
+*.log
+*.ilk
+*.exe
+*.sdf
+*.opensdf
+
+# Archivos de usuario de Visual Studio (configuraciones locales)
+*.user
+*.suo
+
+# No ignorar librerías externas necesarias si no usas un gestor de paquetes
+!bass.dll
+!bass.lib
+!bass.h

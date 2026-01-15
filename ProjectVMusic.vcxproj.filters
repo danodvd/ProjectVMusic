@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado\UI">
+      <UniqueIdentifier>{201f0947-1642-48e2-8955-0d365d2263ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Audio">
+      <UniqueIdentifier>{00ea4645-5a30-47a3-8ef7-2f8e9aee2acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Pages">
+      <UniqueIdentifier>{f6b4193c-58de-4fe0-b96c-9fb4bc87f08d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Utils">
+      <UniqueIdentifier>{5574c2c7-3f11-480c-bca2-9cd7b217884c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\UI\Utils">
+      <UniqueIdentifier>{787d38ca-187d-40a0-aa1c-33a64bbfcdbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\UI\Components">
+      <UniqueIdentifier>{c84efc04-c765-4f93-bbb9-32eaf5e7f203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\UI">
+      <UniqueIdentifier>{9966e48b-da29-4ded-88df-34b9dcd31b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\UI\Components">
+      <UniqueIdentifier>{35be2685-c4bc-43e0-a645-46c5b1106de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\UI\Utils">
+      <UniqueIdentifier>{6a5503ac-ef7f-4a72-942d-c0a2062753d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Utils">
+      <UniqueIdentifier>{235d22bb-7443-4d47-9300-b412ea24f1cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Audio">
+      <UniqueIdentifier>{98c4fc32-6d60-4e02-8ebb-f62a49fb1bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Pages">
+      <UniqueIdentifier>{bb2e4abd-e1af-454e-9a46-72445f8fc710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Main">
+      <UniqueIdentifier>{52585cc6-7663-4808-8a5c-74be3f35827e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Pages\SubViews">
+      <UniqueIdentifier>{86aa23f7-5c62-4bc5-aee3-a139c4f75246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Utils\Services">
+      <UniqueIdentifier>{78458d62-eb53-4088-800f-c80f39ff0d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Utils\Services">
+      <UniqueIdentifier>{817ff7fe-54a6-46a7-8aa0-3391fa9ab6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Pages\SubViews">
+      <UniqueIdentifier>{66ce19e5-7cde-4646-bffc-cbf7909f15ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Utils\Commands">
+      <UniqueIdentifier>{4c7583c5-e56f-49b6-8f81-5478cb1ae238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Utils\Commands">
+      <UniqueIdentifier>{28a4b3ab-e5b8-4682-8314-25206675fc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Main">
+      <UniqueIdentifier>{91e93dc3-77c5-4dca-a9a3-6b3413ed0acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Pages\Widgets">
+      <UniqueIdentifier>{05cc1aae-6abb-4a51-8f90-0ccbbc3e326d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Pages\Widgets">
+      <UniqueIdentifier>{4b4bf4ee-ace9-4cbf-8867-ed924c736603}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>Archivos de origen\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Archivos de origen\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ID3Reader.cpp">
+      <Filter>Archivos de origen\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonNav.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayButton.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="NavBar.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoPanel.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeControl.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeIcons.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformUtils.cpp">
+      <Filter>Archivos de origen\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPagePrincipal.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPageMyMusic.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="SongImportService.cpp">
+      <Filter>Archivos de origen\Utils\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Archivos de origen\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Album.cpp">
+      <Filter>Archivos de origen\Pages\SubViews</Filter>
+    </ClCompile>
+    <ClCompile Include="Artist.cpp">
+      <Filter>Archivos de origen\Pages\SubViews</Filter>
+    </ClCompile>
+    <ClCompile Include="SongRow.cpp">
+      <Filter>Archivos de origen\Pages\SubViews</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPageConfig.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPageSongQueue.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectSongService.cpp">
+      <Filter>Archivos de origen\Utils\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Page.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="UIUtils.cpp">
+      <Filter>Archivos de origen\UI\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Archivos de origen\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Archivos de origen\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeBackgroundCommand.cpp">
+      <Filter>Archivos de origen\Utils\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="PageManager.cpp">
+      <Filter>Archivos de origen\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioVisualizerWidget.cpp">
+      <Filter>Archivos de origen\Pages\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="LibraryModel.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="NewPageMyMusic.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Page.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtils.hpp">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UIUtils.hpp">
+      <Filter>Archivos de encabezado\UI\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonNav.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayButton.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NavBar.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoPanel.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeControl.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SongData.hpp">
+      <Filter>Archivos de encabezado\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayBackInfo.hpp">
+      <Filter>Archivos de encabezado\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeIcons.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformUtils.hpp">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="NewAudioManager.hpp">
+      <Filter>Archivos de encabezado\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="NewID3Reader.hpp">
+      <Filter>Archivos de encabezado\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="NewPagePrincipal.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Album.hpp">
+      <Filter>Archivos de encabezado\Pages\SubViews</Filter>
+    </ClInclude>
+    <ClInclude Include="SongRow.hpp">
+      <Filter>Archivos de encabezado\Pages\SubViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Artist.hpp">
+      <Filter>Archivos de encabezado\Pages\SubViews</Filter>
+    </ClInclude>
+    <ClInclude Include="SongImportService.hpp">
+      <Filter>Archivos de encabezado\Utils\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="NewPageConfig.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectSongService.hpp">
+      <Filter>Archivos de encabezado\Utils\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectSongCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SongImportCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeSubViewCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="NewPageSongQueue.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SubView.hpp">
+      <Filter>Archivos de encabezado\Pages\SubViews</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBackgroundCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteQueueCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.hpp">
+      <Filter>Archivos de encabezado\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.hpp">
+      <Filter>Archivos de encabezado\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeChange.hpp">
+      <Filter>Archivos de encabezado\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioVisualizerWidget.hpp">
+      <Filter>Archivos de encabezado\Pages\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PageManager.hpp">
+      <Filter>Archivos de encabezado\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryModel.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

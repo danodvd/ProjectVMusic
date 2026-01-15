@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.props" Condition="Exists('..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9e5e0b27-ff04-4005-a42c-8a38fa1e52b6}</ProjectGuid>
+    <RootNamespace>ProjectVMusic</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Album.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Artist.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AudioVisualizerWidget.cpp" />
+    <ClCompile Include="ButtonNav.cpp" />
+    <ClCompile Include="ChangeBackgroundCommand.cpp" />
+    <ClCompile Include="LibraryModel.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NewPageConfig.cpp" />
+    <ClCompile Include="NewPageMyMusic.cpp" />
+    <ClCompile Include="NewPagePrincipal.cpp" />
+    <ClCompile Include="NewPageSongQueue.cpp" />
+    <ClCompile Include="Page.cpp" />
+    <ClCompile Include="PageManager.cpp" />
+    <ClCompile Include="PlatformUtils.cpp" />
+    <ClInclude Include="AudioVisualizerWidget.hpp" />
+    <ClInclude Include="ChangeBackgroundCommand.hpp" />
+    <ClInclude Include="DeleteQueueCommand.hpp" />
+    <ClInclude Include="LibraryModel.hpp" />
+    <ClInclude Include="PageManager.hpp" />
+    <ClCompile Include="SelectSongService.cpp" />
+    <ClCompile Include="SongImportService.cpp" />
+    <ClCompile Include="SongRow.cpp" />
+    <ClCompile Include="UIUtils.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="VolumeIcons.cpp" />
+    <ClCompile Include="ID3Reader.cpp" />
+    <ClCompile Include="InfoPanel.cpp" />
+    <ClCompile Include="NavBar.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
+    <ClCompile Include="VolumeControl.cpp" />
+    <ClInclude Include="Widget.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NewPageMyMusic.hpp" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Album.hpp" />
+    <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Artist.hpp" />
+    <ClInclude Include="ButtonNav.hpp" />
+    <ClInclude Include="PlayButton.hpp" />
+    <ClInclude Include="PlatformUtils.hpp" />
+    <ClInclude Include="SelectSongCommand.hpp" />
+    <ClInclude Include="SelectSongService.hpp" />
+    <ClInclude Include="ChangeSubViewCommand.hpp" />
+    <ClInclude Include="SongImportCommand.hpp" />
+    <ClInclude Include="SubView.hpp" />
+    <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="VolumeChange.hpp" />
+    <ClInclude Include="VolumeIcons.hpp" />
+    <ClInclude Include="Main.hpp" />
+    <ClInclude Include="NewAudioManager.hpp" />
+    <ClInclude Include="NewID3Reader.hpp" />
+    <ClInclude Include="NewPageConfig.hpp" />
+    <ClInclude Include="NewPagePrincipal.hpp" />
+    <ClInclude Include="NewPageSongQueue.hpp" />
+    <ClInclude Include="PlayBackInfo.hpp" />
+    <ClInclude Include="ProgressBar.hpp" />
+    <ClInclude Include="Command.hpp" />
+    <ClInclude Include="NavBar.hpp" />
+    <ClInclude Include="Page.hpp" />
+    <ClInclude Include="InfoPanel.hpp" />
+    <ClInclude Include="SongData.hpp" />
+    <ClInclude Include="SongImportService.hpp" />
+    <ClInclude Include="SongRow.hpp" />
+    <ClInclude Include="UIUtils.hpp" />
+    <ClInclude Include="FileUtils.hpp" />
+    <ClInclude Include="VolumeControl.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.targets" Condition="Exists('..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.props'))" />
+    <Error Condition="!Exists('..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SFML_VS2019.1.0.0\build\SFML_VS2019.targets'))" />
+  </Target>
+</Project>
