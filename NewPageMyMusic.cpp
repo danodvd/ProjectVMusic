@@ -11,7 +11,7 @@
 PageMyMusic::PageMyMusic(AudioManager& audioRef) : Page(audioRef) {
 	lastSongCount = 0;
 
-	UIUtils::ConfigureLabel(title, 25, { 60, 20 }, "Mi Música");
+	UIUtils::ConfigureLabel(title, 36, { 80, 7 }, "Mi Música");
 
 	UIUtils::ConfigureLabel(txtSongs, 18, { 200, 25 }, "Canciones");
 	UIUtils::ConfigureLabel(txtArtists, 18, { 350, 25 }, "Artistas");
@@ -26,21 +26,17 @@ PageMyMusic::PageMyMusic(AudioManager& audioRef) : Page(audioRef) {
 	albumView.Init(this, &audio);
 	artistView.Init(this, &audio);
 	songView.Init(&audio);
-	
-	// 1. Botón Canciones
+
 	Button btnSongs;
 	btnSongs.bounds = boxSongs.getGlobalBounds();
-	// Al hacer click, cambiar a vista SONGS
 	btnSongs.command = std::make_unique<ChangeSubViewCommand>(*this, SubView::Songs);
 	buttons.push_back(std::move(btnSongs));
 
-	// 2. Botón Álbumes
 	Button btnAlbums;
 	btnAlbums.bounds = boxAlbums.getGlobalBounds();
 	btnAlbums.command = std::make_unique<ChangeSubViewCommand>(*this, SubView::Albums);
 	buttons.push_back(std::move(btnAlbums));
 
-	// 3. Botón Artistas
 	Button btnArtists;
 	btnArtists.bounds = boxArtists.getGlobalBounds();
 	btnArtists.command = std::make_unique<ChangeSubViewCommand>(*this, SubView::Artists);
@@ -52,6 +48,7 @@ PageMyMusic::PageMyMusic(AudioManager& audioRef) : Page(audioRef) {
 	buttons.push_back(std::move(btnAdd));
 
 	UpdateCurrentView();
+	Update();
 }
 
 std::vector<SongRow> PageMyMusic::CreateSongRows(const std::vector<const SongData*>& sourceData) {
@@ -60,7 +57,6 @@ std::vector<SongRow> PageMyMusic::CreateSongRows(const std::vector<const SongDat
 
 	for (const auto* song : sourceData) {
 		SongRow row;
-		//
 		UIUtils::ConfigureLabel(row.title, 14, { 0,0 }, song->title.empty() ? "Desconocido" : song->title);
 		UIUtils::ConfigureLabel(row.artist, 14, { 0,0 }, song->artist.empty() ? "Desconocido" : song->artist, sf::Color(200, 200, 200));
 		UIUtils::ConfigureLabel(row.duration, 14, { 0,0 }, Utils::FormatDuration(song->duration));
@@ -85,12 +81,45 @@ void PageMyMusic::Update() {
 		lastSongCount = currentCount; 
 		Refresh();                   
 	}
+
+	songView.Update();
+}
+
+void PageMyMusic::UpdateLayout(sf::Vector2u newSize)
+{
+	Page::UpdateLayout(newSize);
+
+	float w = static_cast<float>(newSize.x);
+	float centerX = w / 2.0f;
+
+	float spacing = 150.f;
+	float y = 25.f;
+	float startX = centerX - (spacing * 1.5f);
+
+	std::vector<std::pair<sf::Text*, sf::RectangleShape*>> items = {
+		{ &txtSongs,    &boxSongs },
+		{ &txtArtists,  &boxArtists },
+		{ &txtAlbums,   &boxAlbums },
+		{ &txtAddSongs, &boxAddSongs }
+	};
+
+	for (size_t i = 0; i < items.size(); ++i)
+	{
+		auto& [text, box] = items[i];
+
+		text->setPosition(startX + spacing * i, y);
+		box->setPosition(text->getPosition().x - 30, y - 10);
+
+		buttons[i].bounds = box->getGlobalBounds();
+	}
+
+	songView.UpdateLayout(w);
 }
 
 void PageMyMusic::SetCurrentView(SubView newView) {
 	currentView = newView;
 	
-	UpdateCurrentView(); // Recalcula y llena las listas
+	UpdateCurrentView();
 }
 
 void PageMyMusic::UpdateCurrentView() {
@@ -101,6 +130,10 @@ void PageMyMusic::UpdateCurrentView() {
 	switch (currentView) {
 		case SubView::Songs:
 			songView.SetSongs(CreateSongRows(library.GetSongsSortedByTitle()));
+			if (commonBackground.getVertexCount() > 2) {
+				float currentWidth = commonBackground[2].position.x;
+				songView.UpdateLayout(currentWidth);
+			}
 			songView.SetActive();
 			break;
 
@@ -136,6 +169,7 @@ void PageMyMusic::OpenArtist(const ArtistData* artist) {
 
 void PageMyMusic::Draw(sf::RenderTarget& target) {
 	Page::DrawBackground(target);
+	target.draw(title);
 	target.draw(txtAddSongs);
 	target.draw(txtSongs);
 	target.draw(txtAlbums);

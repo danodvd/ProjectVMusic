@@ -56,4 +56,14 @@ namespace UIUtils {
 		sf::Vector2f position = { 0.f, 0.f },
 		const sf::String& text = "sampleText",
 		sf::Color fillColor = sf::Color::White);
+
+	static void ClipText(sf::Text& text, float maxWidth) {
+		if (text.getLocalBounds().width <= maxWidth) return;
+
+		std::string str = text.getString();
+		while (text.getLocalBounds().width > maxWidth && str.length() > 3) {
+			str.pop_back();
+			text.setString(str + "...");
+		}
+	}
 };

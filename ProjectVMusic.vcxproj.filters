@@ -168,6 +168,15 @@
     <ClCompile Include="LibraryModel.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="LibraryPersistence.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="EqualizerControl.cpp">
+      <Filter>Archivos de origen\UI\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeThemeCommand.cpp">
+      <Filter>Archivos de origen\Utils\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -288,6 +297,18 @@
       <Filter>Archivos de encabezado\Pages</Filter>
     </ClInclude>
     <ClInclude Include="LibraryModel.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryPersistence.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="EqualizerControl.hpp">
+      <Filter>Archivos de encabezado\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeThemeCommand.hpp">
+      <Filter>Archivos de encabezado\Utils\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="BiquadFilter.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

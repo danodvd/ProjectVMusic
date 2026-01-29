@@ -3,7 +3,6 @@
 namespace UIUtils {
 	sf::Font globalFont;
 
-	// Implementación de las funciones de carga
 	bool LoadFont(const std::string& path) {
 		return globalFont.loadFromFile(path);
 	}

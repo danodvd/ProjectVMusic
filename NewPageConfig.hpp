@@ -17,8 +17,22 @@ public:
 
 	void UpdateLayout(sf::Vector2u newSize) override;
 
+	void HandleClick(const sf::Vector2f& mousePos) override;
+
 private:
 	sf::Text title;
 	sf::Text changeBgdTxt;
 	sf::RectangleShape changeBgdBox;
+
+	sf::Text changeBgdThemeTxt;
+	sf::RectangleShape changeBgdThemeBox;
+
+	sf::Text lightThemeTxt;
+	sf::Text darkThemeTxt;
+
+	sf::RectangleShape changeBgdThemeDropdown;
+	bool enableThemeDropdown = false;
+
+	sf::RectangleShape lightThemeBox;
+	sf::RectangleShape darkThemeBox;
 };

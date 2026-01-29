@@ -135,7 +135,10 @@
     <ClCompile Include="AudioVisualizerWidget.cpp" />
     <ClCompile Include="ButtonNav.cpp" />
     <ClCompile Include="ChangeBackgroundCommand.cpp" />
+    <ClCompile Include="ChangeThemeCommand.cpp" />
+    <ClCompile Include="EqualizerControl.cpp" />
     <ClCompile Include="LibraryModel.cpp" />
+    <ClCompile Include="LibraryPersistence.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NewPageConfig.cpp" />
     <ClCompile Include="NewPageMyMusic.cpp" />
@@ -145,9 +148,13 @@
     <ClCompile Include="PageManager.cpp" />
     <ClCompile Include="PlatformUtils.cpp" />
     <ClInclude Include="AudioVisualizerWidget.hpp" />
+    <ClInclude Include="BiquadFilter.hpp" />
     <ClInclude Include="ChangeBackgroundCommand.hpp" />
+    <ClInclude Include="ChangeThemeCommand.hpp" />
     <ClInclude Include="DeleteQueueCommand.hpp" />
+    <ClInclude Include="EqualizerControl.hpp" />
     <ClInclude Include="LibraryModel.hpp" />
+    <ClInclude Include="LibraryPersistence.hpp" />
     <ClInclude Include="PageManager.hpp" />
     <ClCompile Include="SelectSongService.cpp" />
     <ClCompile Include="SongImportService.cpp" />

@@ -16,14 +16,19 @@ struct SongRow {
     sf::Text duration;
 };
 
-class SongView : public SubView { // Heredar de SubView
+class SongView : public SubView { 
 public:
     void Init(AudioManager* audioRef);
+
     void SetSongs(const std::vector<SongRow>& songs);
+
     void Draw(sf::RenderTarget& target) override;
+
     void HandleClick(const sf::Vector2f& mousePos) override;
 
-    // Implementación necesaria para que no sea abstracta
+    void Update();
+    void UpdateLayout(float width);
+
     void SetActive() override { isActive = true; }
     void SetInactive() { isActive = false; }
 
@@ -31,4 +36,17 @@ private:
     bool isActive = false;
     std::vector<SongRow> items;
     AudioManager* audio = nullptr;
+
+    static constexpr float START_Y = 100.f;
+    static constexpr float START_X = 50.f;
+    static constexpr float ITEM_SPACING = 50.f;
+    static constexpr float BACKGROUND_POS_Y = 25.f;
+
+    const sf::Color TXT_COLOR_ACTIVE = sf::Color(255, 127, 0);
+    const sf::Color TXT_COLOR_NORMAL = sf::Color::White;
+
+
+    const sf::Color BACKGROUND_COLOR1 = sf::Color(20, 20, 20, 80);
+    const sf::Color BACKGROUND_COLOR2 = (sf::Color(40, 40, 40, 80));
+    sf::Color CURRENT_COLOR;
 };

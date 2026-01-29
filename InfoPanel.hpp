@@ -9,7 +9,9 @@ public:
     InfoPanel();
 
     void LoadFont(std::string fontPath);
+
     void Update(const PlaybackInfo& info);
+
     void Draw(sf::RenderTarget& target);
 private:
     sf::Text txtTitle;

@@ -11,7 +11,7 @@ ProgressBar::ProgressBar(sf::Vector2f pos, sf::Vector2f size) {
 }
 
 void ProgressBar::Update(const PlaybackInfo& info) {
-    if (!info.isPlaying || info.len <= 0) {
+    if (info.hasStopped || info.len <= 0) {
         fill.setSize({ 0.f, background.getSize().y });
         return;
     }

@@ -52,10 +52,14 @@ public:
     void HandleClick(const sf::Vector2f& mousePos);
 
     void Update() override;
+    void UpdateLayout(sf::Vector2u newSize) override;
 
     void Draw(sf::RenderTarget& target);
 
 private:
+    size_t lastQueueSize = 0;
+    void UpdateStyles();
+
     /// Visual representations of the songs currently in the queue.
     /// This container is rebuilt whenever the queue changes.
     std::vector<QueueItemView> items;
@@ -68,25 +72,26 @@ private:
     sf::RectangleShape deleteQueueBox;
     sf::Text deleteQueueText;
 
-    const sf::Color Q_BG_NORMAL = sf::Color(45, 45, 50);
-    const sf::Color Q_BG_HOVER = sf::Color(60, 60, 65);
+    const sf::Color BACKGROUND_COLOR1 = sf::Color(20, 20, 20, 80);
+    const sf::Color BACKGROUND_COLOR2 = (sf::Color(40, 40, 40, 80));
+    sf::Color Q_BG_NORMAL;
+
+    const sf::Color Q_BG_HOVER = sf::Color(60, 130, 200, 120);
     const sf::Color Q_TXT_NORMAL = sf::Color(230, 230, 230);
-    const sf::Color Q_TXT_ACTIVE = sf::Color(255, 140, 0);
+    const sf::Color Q_TXT_ACTIVE = sf::Color(255, 127, 0);
     const sf::Color Q_TXT_DIM = sf::Color(160, 160, 160);
 
-    // --- Configuración Visual (Dark Mode) ---
-    const float ROW_HEIGHT = 50.f;
-    const float ROW_SPACING = 5.f;
-    const float START_Y = 100.f;
+    static constexpr float ITEM_SPACING = 50.f;
 
-    // Columnas
+    const float ROW_HEIGHT = 50.f;
+    const float ROW_SPACING = 0.f;
+    const float START_Y = 100.f;
+    static constexpr float START_X = 50.f;
+
     const float COL_TITLE = 50.f;
     const float COL_ALBUM = 400.f;
     const float COL_ARTIST = 650.f;
     const float COL_YEAR = 850.f;
     const float COL_GENRE = 950.f;
     const float COL_DURATION = 1100.f;
-
-    // Helpers internos
-    std::string FormatTime(double seconds);
 };

@@ -65,4 +65,12 @@ private:
     sf::Text lblArtist;
 
     std::string lastSongTitle = "";
+
+    std::string fullTitleStr;
+    std::string fullArtistStr;
+
+    float currentPanelW = 250.f; 
+    float currentPanelX = 0.f;
+
+    void RecalculateTextTruncation();
 };

@@ -6,7 +6,20 @@
 #include <algorithm> // Para std::clamp (C++17)
 #include "SongData.hpp"
 
-AudioManager::AudioManager() : stream(0), volume(1.0f) {}
+AudioManager::AudioManager() : stream(0), volume(1.0f) {
+    eqBands = {
+        { EQType::LowShelf,   80.f, 0.7f, 0.f },
+        { EQType::Peaking,   250.f, 1.0f, 0.f }, 
+        { EQType::Peaking,  1000.f, 1.0f, 0.f }, 
+        { EQType::Peaking,  4000.f, 1.0f, 0.f },
+        { EQType::HighShelf,8000.f, 0.7f, 0.f } 
+    };
+
+    for (auto& band : eqBands) {
+        band.filters.resize(2);
+        band.UpdateFilter(sampleRate);
+    }
+}
 
 AudioManager::~AudioManager() {
     Free();
@@ -72,23 +85,6 @@ bool AudioManager::ContainsSong(SongID ID) const{
     return false;
 }
 
-void AudioManager::LoadInternal(size_t index, bool play) {
-    if (index >= playlist.size()) return;
-
-    if (stream) BASS_StreamFree(stream);
-
-    const auto& song = playlist[index];
-    stream = BASS_StreamCreateFile(FALSE, song.filePath.c_str(), 0, 0, 0);
-
-    if (stream) {
-        BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, volume);
-
-        if (play) {
-            BASS_ChannelPlay(stream, FALSE);
-        }
-    }
-}
-
 void AudioManager::TogglePause() {
     if (!stream) return;
 
@@ -113,8 +109,13 @@ void AudioManager::SetVolume(float newVolume) {
     }
 }
 
-float AudioManager::GetVolume() const {
-    return volume;
+void AudioManager::Seek(double percentage) {
+    if (!stream) return;
+
+    QWORD len = BASS_ChannelGetLength(stream, BASS_POS_BYTE);
+    QWORD newPos = static_cast<QWORD>(len * percentage);
+
+    BASS_ChannelSetPosition(stream, newPos, BASS_POS_BYTE);
 }
 
 void AudioManager::Next() {
@@ -139,15 +140,6 @@ void AudioManager::Previous() {
     }
 
     LoadByIndex(prevIndex, true);
-}
-
-void AudioManager::Seek(double percentage) {
-    if (!stream) return;
-
-    QWORD len = BASS_ChannelGetLength(stream, BASS_POS_BYTE);
-    QWORD newPos = static_cast<QWORD>(len * percentage);
-
-    BASS_ChannelSetPosition(stream, newPos, BASS_POS_BYTE);
 }
 
 void AudioManager::UpdateAutoPlay() {
@@ -179,6 +171,10 @@ double AudioManager::GetLengthSecs() const {
     return BASS_ChannelBytes2Seconds(stream, len);
 }
 
+float AudioManager::GetVolume() const {
+    return volume;
+}
+
 bool AudioManager::IsPlaying() const {
     if (!stream) return false;
     return BASS_ChannelIsActive(stream) == BASS_ACTIVE_PLAYING;
@@ -193,6 +189,90 @@ void AudioManager::GetFFT(float* fftData) const {
         BASS_ChannelGetData(stream, fftData, BASS_DATA_FFT2048);
     }
     else {
-        std::fill_n(fftData, 1024, 0.0f); 
+        std::fill_n(fftData, 1024, 0.0f);
+    }
+}
+
+void AudioManager::SetEQ(int bandIndex, float gain) {
+    if (bandIndex < 0 || bandIndex >= eqBands.size()) return;
+
+    if (gain > 15.0f) gain = 15.0f;
+    if (gain < -15.0f) gain = -15.0f;
+
+    if (eqBands[bandIndex].gainDB != gain) {
+        eqBands[bandIndex].gainDB = gain;
+
+        eqBands[bandIndex].UpdateFilter(sampleRate);
+    }
+}
+
+void AudioManager::UpdateEQCoefficients() {
+    for (auto& band : eqBands) {
+        band.UpdateFilter(sampleRate);
+    }
+}
+
+float AudioManager::GetEQ(int bandIndex) const {
+    if (bandIndex >= 0 && bandIndex < 3) return currentEqGains[bandIndex];
+    return 0.f;
+}
+
+void AudioManager::LoadInternal(size_t index, bool play) {
+    if (index >= playlist.size()) return;
+
+    if (stream) {
+        BASS_StreamFree(stream);
+        stream = 0;
+    }
+
+    const auto& song = playlist[index];
+    stream = BASS_StreamCreateFile(FALSE, song.filePath.c_str(), 0, 0, BASS_SAMPLE_FLOAT);
+
+    if (stream) {
+        BASS_CHANNELINFO info;
+        BASS_ChannelGetInfo(stream, &info);
+
+        for (auto& band : eqBands) {
+            if (band.filters.size() != info.chans) {
+                band.filters.clear();
+                band.filters.resize(info.chans);
+            }
+            for (auto& f : band.filters) f.Reset();
+        }
+
+        UpdateEQCoefficients();
+
+        dspHandle = BASS_ChannelSetDSP(stream, &EqualizerDSP, this, 1000);
+
+        BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, volume);
+
+        if (play) {
+            BASS_ChannelPlay(stream, FALSE);
+        }
+    }
+}
+
+void CALLBACK AudioManager::EqualizerDSP(HDSP handle, DWORD channel, void* buffer, DWORD length, void* user) {
+    AudioManager* self = (AudioManager*)user;
+    float* data = (float*)buffer;
+
+    DWORD numSamples = length / sizeof(float);
+
+    BASS_CHANNELINFO info;
+    BASS_ChannelGetInfo(channel, &info);
+    DWORD channels = info.chans;
+
+    for (DWORD i = 0; i < numSamples; i += channels) {
+        for (DWORD ch = 0; ch < channels; ch++) {
+            float sample = data[i + ch];
+
+            for (auto& band : self->eqBands) {
+                if (ch < band.filters.size()) {
+                    sample = band.filters[ch].Process(sample);
+                }
+            }
+
+            data[i + ch] = sample;
+        }
     }
 }

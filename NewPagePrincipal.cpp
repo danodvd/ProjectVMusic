@@ -9,13 +9,13 @@ PagePrincipal::PagePrincipal(AudioManager& audioRef) : Page(audioRef) {
 	rPanelIsActive = false;
 	hasCover = false;
 
-	UIUtils::ConfigureLabel(title, 18, { 60, 20 }, "Página Principal");
+	UIUtils::ConfigureLabel(title, 36, { 80, 7 }, "Página Principal");
 	UIUtils::ConfigureLabel(txtMusic, 18, { 590, 20 }, "Seleccionar Canción");
 	
 	UIUtils::ConfigureBox(boxMusic, { 210, 40 }, { txtMusic.getPosition().x - 15, txtMusic.getPosition().y - 10 }, sf::Color(255, 255, 255, 30), sf::Color::White);
 	UIUtils::ConfigureBox(rightPanel, { 250,630 }, { 1030, 0 }, sf::Color(40, 40, 40, 120), sf::Color::Transparent, 0);
 
-	rPanelGradient = Page::SetBackgroundGradient(rightPanel);
+	rPanelGradient = Page::SetBackgroundGradient(rightPanel, *currentTheme);
 
 	UIUtils::ConfigureBox(artPlaceHolder, { 200, 200 }, { 1055, 50 }, sf::Color::Transparent, sf::Color(100, 100, 100), 2);
 
@@ -31,25 +31,27 @@ PagePrincipal::PagePrincipal(AudioManager& audioRef) : Page(audioRef) {
 }
 
 void PagePrincipal::UpdateInfo(const SongData& data) {
-	std::string songName = data.title;
-	std::string artistName = data.artist;
-	std::vector<unsigned char> imgData = data.coverImage;
-	if (songName.length() > 25) songName = songName.substr(0, 22) + "...";
-	lblSongTitle.setString(songName);
-	lblArtist.setString(artistName);
+	fullTitleStr = data.title;
+	fullArtistStr = data.artist;
 
 	hasCover = false;
+	std::vector<unsigned char> imgData = data.coverImage;
 	if (!imgData.empty()) {
 		if (artTexture.loadFromMemory(imgData.data(), imgData.size())) {
 			hasCover = true;
 			artSprite.setTexture(artTexture);
 
+			float contentW = currentPanelW * 0.8f;
+
 			sf::Vector2u size = artTexture.getSize();
-			float scaleX = 200.0f / size.x;
-			float scaleY = 200.0f / size.y;
-			artSprite.setScale(scaleX, scaleY);
+			if (size.x > 0) {
+				float scale = contentW / (float)size.x;
+				artSprite.setScale(scale, scale);
+			}
 		}
 	}
+
+	RecalculateTextTruncation();
 }
 
 void PagePrincipal::ToggleRPanel(const PlaybackInfo& info) {
@@ -62,12 +64,11 @@ void PagePrincipal::UpdateVisualizer(const float* fftData) {
 }
 
 void PagePrincipal::Draw(sf::RenderTarget& target) {
-	// 1. DIBUJAR FONDO UNIVERSAL PRIMERO
 	if (hasCustomBg) {
 		target.draw(bgSprite);
 	}
 	else {
-		Page::DrawBackground(target); // <--- ESTO APLICA EL DEGRADADO
+		Page::DrawBackground(target); 
 	}
 
 	target.draw(title);
@@ -97,17 +98,12 @@ void PagePrincipal::Draw(sf::RenderTarget& target) {
 }
 
 void PagePrincipal::Update(const PlaybackInfo& info) {
-	ToggleRPanel(info); // Lógica interna
+	ToggleRPanel(info);
 
 	if (info.isPlaying) {
-		// 1. LÓGICA DEL VISUALIZADOR (Lo que faltaba)
-			float fftData[1024];
-			// 'audio' es accesible porque heredas de Page
-			audio.GetFFT(fftData);
-			visualizer.UpdateVisualizer(fftData);
-
-		// 2. LÓGICA DE ACTUALIZACIÓN DE DATOS (Título, Artista, Cover)
-		// Verificamos si hay una canción sonando actualmente
+		float fftData[1024];
+		audio.GetFFT(fftData);
+		visualizer.UpdateVisualizer(fftData);
 		const SongData* currentSong = audio.GetCurrentSong();
 
 		if (currentSong) {
@@ -125,30 +121,61 @@ void PagePrincipal::UpdateLayout(sf::Vector2u newSize) {
 	float w = (float)newSize.x;
 	float h = (float)newSize.y;
 
-	// Ancho fijo del panel derecho
-	float panelW = 250.f;
-	float panelX = w - panelW; // Empieza donde termina la pantalla menos 250px
+	float panelW = w / 3.0f;
+	float panelX = w - panelW;
 
-	rightPanel.setSize({ panelW, h - 90}); // Alto completo
+	currentPanelW = panelW;
+	currentPanelX = panelX;
+
+	rightPanel.setSize({ panelW, h });
 	rightPanel.setPosition(panelX, 0);
+	rPanelGradient = Page::SetBackgroundGradient(rightPanel, *currentTheme);
 
-	rPanelGradient = Page::SetBackgroundGradient(rightPanel);
+	float contentW = panelW * 0.8f;
+	float contentX = panelX + (panelW * 0.1f);
 
-	float btnW = 210.f;
-	float btnX = panelX + (panelW - btnW) / 2.f;
+	UIUtils::ConfigureBox(boxMusic, { contentW, 40 }, { contentX, 20 }, sf::Color(255, 255, 255, 30), sf::Color::White);
 
-	UIUtils::ConfigureLabel(txtMusic, 18, { btnX + 15, 30 }, "Seleccionar Canción");
-	UIUtils::ConfigureBox(boxMusic, { btnW, 40 }, { btnX, 20 }, sf::Color(255, 255, 255, 30), sf::Color::White);
+	sf::FloatRect txtBounds = txtMusic.getLocalBounds();
+	float txtX = contentX + (contentW - txtBounds.width) / 2.0f;
+	float txtY = 20.f + (40.f - txtBounds.height) / 2.f - 5.f; 
+	txtMusic.setPosition(txtX, txtY);
 
 	if (!buttons.empty()) buttons[0].bounds = boxMusic.getGlobalBounds();
 
-	float textMargin = 20.f;
+	if (!buttons.empty()) buttons[0].bounds = boxMusic.getGlobalBounds();
 
-	artSprite.setPosition(panelX + (panelW - 200) / 2, 80);
-	artPlaceHolder.setPosition(panelX + (panelW - 200) / 2, 80);
+	float artY = 80.f;
 
-	lblSongTitle.setPosition(panelX + textMargin, 300);
-	lblArtist.setPosition(panelX + textMargin, 330); // "Release - Topic" ahora seguirá al panel
+	artPlaceHolder.setSize({ contentW, contentW });
+	artPlaceHolder.setPosition(contentX, artY);
 
-	float visualizerCenter = (w - panelW) / 2.f;
+	artSprite.setPosition(contentX, artY);
+
+	if (artTexture.getSize().x > 0) {
+		float scale = contentW / (float)artTexture.getSize().x;
+		artSprite.setScale(scale, scale);
+	}
+	float textY = artY + contentW + 20.f;
+
+	lblSongTitle.setPosition(contentX, textY);
+	lblArtist.setPosition(contentX, textY + 30.f);
+
+	RecalculateTextTruncation();
+}
+
+void PagePrincipal::RecalculateTextTruncation() {
+	lblSongTitle.setString(fullTitleStr.empty() ? "Sin Canción" : fullTitleStr);
+	lblArtist.setString(fullArtistStr.empty() ? "Desconocido" : fullArtistStr);
+
+	float contentX = lblSongTitle.getPosition().x; 
+	float panelRightEdge = currentPanelX + currentPanelW;
+	float hardLimitX = panelRightEdge - (currentPanelW * 0.20f); 
+
+	float maxTextWidth = hardLimitX - contentX;
+
+	if (maxTextWidth < 50.f) maxTextWidth = 50.f;
+
+	UIUtils::ClipText(lblSongTitle, maxTextWidth);
+	UIUtils::ClipText(lblArtist, maxTextWidth);
 }

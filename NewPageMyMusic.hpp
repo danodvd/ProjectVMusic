@@ -31,6 +31,8 @@ public:
 
 	void Update() override;
 
+	void UpdateLayout(sf::Vector2u newSize) override;
+
 	void UpdateCurrentView();
 
 	void SetCurrentView(SubView newView);

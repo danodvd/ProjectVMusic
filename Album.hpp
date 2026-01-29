@@ -36,9 +36,13 @@ class PageMyMusic; // Forward declaration.
 class AlbumView : public SubView {
 public:
 	void Init(PageMyMusic* parentPage, AudioManager* audioRef);
+
     void SetAlbums(const std::vector<AlbumData>& albums);
+
     void Draw(sf::RenderTarget& target) override;
+
     void HandleClick(const sf::Vector2f& mousePos) override;
+
 	void SetActive() override;
 	void SetInactive() { isActive = false; }
 

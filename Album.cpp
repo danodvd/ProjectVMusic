@@ -71,7 +71,6 @@ void AlbumView::HandleClick(const sf::Vector2f& mousePos) {
     for (AlbumViewItem& item : items) { 
         if (item.box.getGlobalBounds().contains(mousePos)) {
             if (parent) {
-                // CAMBIO 2: Pasamos la dirección de NUESTRA copia local, que sí es válida
                 parent->OpenAlbum(&item.album);
                 return;
             }

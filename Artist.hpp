@@ -22,11 +22,14 @@ struct ArtistViewItem {
 
 class PageMyMusic; // Forward declaration.
 
-class ArtistView : public SubView { // Heredar de SubView
+class ArtistView : public SubView {
 public:
     void Init(PageMyMusic* parentPage, AudioManager* audioRef);
+
     void SetArtists(const std::vector<ArtistData>& artists);
+
     void Draw(sf::RenderTarget& target) override;
+
     void HandleClick(const sf::Vector2f& mousePos) override;
 
     void SetActive() override { isActive = true; }

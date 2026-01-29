@@ -1,5 +1,5 @@
 #include "InfoPanel.hpp"
-#include <sstream> // Añadir esta línea al inicio del archivo
+#include <sstream> 
 
 InfoPanel::InfoPanel() : fontLoaded(false) {
 }
@@ -8,7 +8,6 @@ void InfoPanel::LoadFont(std::string fontPath) {
     fontLoaded = font.loadFromFile(fontPath);
     if (!fontLoaded) return;
 
-    // Cambiar de vector de punteros a vector de objetos
     std::vector<sf::Text*> texts{ &txtTitle, &txtDuration };
     UIUtils::SetFont(font, texts);
 

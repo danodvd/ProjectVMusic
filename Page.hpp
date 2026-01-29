@@ -29,6 +29,10 @@ struct Button {
 */
 class Page {
 public:
+    enum class Theme {
+        dark,
+        light
+    };
     Page(AudioManager& audioRef);
 
     virtual ~Page() = default;
@@ -62,6 +66,8 @@ public:
     void ChangeBgdImg(const sf::Texture& bgdImg);
 
     bool BgdImgExists();
+
+    void ChangeBackgroundGradient(Theme theme);
 protected:
     /// Collection of buttons belonging to this page.
     std::vector<Button> buttons;
@@ -73,9 +79,14 @@ protected:
     *
     * @param background The background in which the gradient is created.
     */
-    sf::VertexArray SetBackgroundGradient(const sf::RectangleShape& background) const;
+    sf::VertexArray SetBackgroundGradient(const sf::RectangleShape& background, std::vector<sf::Color> theme) const;
 
     sf::VertexArray commonBackground;
 
     static sf::Texture bgdImg;
+    static std::vector<sf::Color> darkTheme;
+    static std::vector<sf::Color> lightTheme;
+    static std::vector<sf::Color>* currentTheme;
+
+    const std::vector<sf::Color>* lastRenderedTheme = nullptr;
 };

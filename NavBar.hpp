@@ -29,6 +29,8 @@ public:
 
     ClickTarget HandleClick(sf::Vector2f mousePos) const;
 
+    void HandleEvent(sf::Vector2f mousePos, sf::Event event);
+
     bool Contains(const sf::Vector2f& mousePos);
 
     void SetHeight(float height);
